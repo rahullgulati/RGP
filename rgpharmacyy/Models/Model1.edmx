@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rgModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime2" Precision="7" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="mid" Type="int" />
+          <Property Name="pid" Type="int" />
+          <Property Name="oid" Type="int" />
+          <Property Name="total_price" Type="money" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Covid_essentials">
+          <Key>
+            <PropertyRef Name="prid" />
+          </Key>
+          <Property Name="prid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pname" Type="varchar" MaxLength="50" />
+          <Property Name="cname" Type="varchar" MaxLength="50" />
+          <Property Name="mdate" Type="datetime2" Precision="7" />
+          <Property Name="edate" Type="datetime2" Precision="7" />
+          <Property Name="price" Type="money" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="img" Type="nvarchar" MaxLength="300" />
+          <Property Name="describe" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Health_care">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="p_name" Type="varchar" MaxLength="100" />
+          <Property Name="c_name" Type="varchar" MaxLength="100" />
+          <Property Name="manufacture_date" Type="datetime2" Precision="7" />
+          <Property Name="expiry_date" Type="datetime2" Precision="7" />
+          <Property Name="price" Type="money" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="img" Type="nvarchar(max)" />
+          <Property Name="des" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_name" Type="varchar" MaxLength="100" />
+          <Property Name="c_name" Type="varchar" MaxLength="100" />
+          <Property Name="manufacture_date" Type="datetime2" Precision="7" />
+          <Property Name="expiry_date" Type="datetime2" Precision="7" />
+          <Property Name="price" Type="money" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="img" Type="nvarchar(max)" />
+          <Property Name="des" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="oid" />
+          </Key>
+          <Property Name="oid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="amount" Type="money" />
+          <Property Name="orderdate" Type="datetime2" Precision="7" />
+          <Property Name="payment_method" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="50" />
+          <Property Name="lname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="phone_no" Type="char" MaxLength="10" />
+          <Property Name="dob" Type="date" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="varchar" MaxLength="10" />
+          <Property Name="created_at" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Function Name="brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="cart_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="cart_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="mid" Type="int" Mode="In" />
+          <Parameter Name="pid" Type="int" Mode="In" />
+          <Parameter Name="oid" Type="int" Mode="In" />
+          <Parameter Name="total_price" Type="money" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Colgate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="covid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="des" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dettol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Health_care_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_name" Type="varchar" Mode="In" />
+          <Parameter Name="c_name" Type="varchar" Mode="In" />
+          <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+          <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="des" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="medicine_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="m_name" Type="varchar" Mode="In" />
+          <Parameter Name="c_name" Type="varchar" Mode="In" />
+          <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+          <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="des" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="medicine_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+          <Parameter Name="m_name" Type="varchar" Mode="In" />
+          <Parameter Name="c_name" Type="varchar" Mode="In" />
+          <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+          <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="des" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Nivea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Orders_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="amount" Type="money" Mode="In" />
+          <Parameter Name="payment_method" Type="varchar" Mode="In" />
+          <Parameter Name="oid" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="char" Mode="In" />
+          <Parameter Name="DOB" Type="date" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="rgModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Covid_essentials" EntityType="Self.Covid_essentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Health_care" EntityType="Self.Health_care" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rgModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone_no" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityContainer Name="rgEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <FunctionImport Name="login" ReturnType="Collection(rgModel.login_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="medicine_insert">
+            <Parameter Name="m_name" Mode="In" Type="String" />
+            <Parameter Name="c_name" Mode="In" Type="String" />
+            <Parameter Name="manufacture_date" Mode="In" Type="DateTime" />
+            <Parameter Name="expiry_date" Mode="In" Type="DateTime" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="des" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Medicines" EntityType="rgModel.Medicine" />
+          <EntitySet Name="Health_care" EntityType="rgModel.Health_care" />
+          <FunctionImport Name="Health_care_insert">
+            <Parameter Name="p_name" Mode="In" Type="String" />
+            <Parameter Name="c_name" Mode="In" Type="String" />
+            <Parameter Name="manufacture_date" Mode="In" Type="DateTime" />
+            <Parameter Name="expiry_date" Mode="In" Type="DateTime" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="des" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="medicine_update">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+            <Parameter Name="m_name" Mode="In" Type="String" />
+            <Parameter Name="c_name" Mode="In" Type="String" />
+            <Parameter Name="manufacture_date" Mode="In" Type="DateTime" />
+            <Parameter Name="expiry_date" Mode="In" Type="DateTime" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="des" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="cart_insert">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+            <Parameter Name="pid" Mode="In" Type="Int32" />
+            <Parameter Name="oid" Mode="In" Type="Int32" />
+            <Parameter Name="total_price" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Carts" EntityType="rgModel.Cart" />
+          <FunctionImport Name="cart_display" ReturnType="Collection(rgModel.cart_display_Result)">
+          <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Orders" EntityType="rgModel.Order" />
+          <FunctionImport Name="Orders_insert">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="amount" Mode="In" Type="Decimal" />
+            <Parameter Name="payment_method" Mode="In" Type="String" />
+            <Parameter Name="oid" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Covid_essentials" EntityType="rgModel.Covid_essentials" />
+          <FunctionImport Name="Colgate" ReturnType="Collection(rgModel.Colgate_Result)" />
+          <FunctionImport Name="Dettol" ReturnType="Collection(rgModel.Dettol_Result)" />
+          <FunctionImport Name="Nivea" ReturnType="Collection(rgModel.Nivea_Result)" />
+          <FunctionImport Name="brand" ReturnType="Collection(rgModel.brand_Result)">
+          <Parameter Name="cname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="covid" ReturnType="Collection(rgModel.covid_Result)">
+          <Parameter Name="des" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="register_user">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="medicine_update1">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+            <Parameter Name="m_name" Mode="In" Type="String" />
+            <Parameter Name="c_name" Mode="In" Type="String" />
+            <Parameter Name="manufacture_date" Mode="In" Type="DateTime" />
+            <Parameter Name="expiry_date" Mode="In" Type="DateTime" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="des" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="login_Result">
+          <Property Type="Int32" Name="uid" Nullable="false" />
+          <Property Type="String" Name="fname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="phone_no" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="dob" Nullable="true" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="role" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="c_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="manufacture_date" Type="DateTime" Precision="7" />
+          <Property Name="expiry_date" Type="DateTime" Precision="7" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Health_care">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="c_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="manufacture_date" Type="DateTime" Precision="7" />
+          <Property Name="expiry_date" Type="DateTime" Precision="7" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="7" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mid" Type="Int32" />
+          <Property Name="oid" Type="Int32" />
+          <Property Name="total_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="pid" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="cart_display_Result">
+          <Property Type="Int32" Name="cid" Nullable="false" />
+          <Property Type="Int32" Name="mid" Nullable="true" />
+          <Property Type="Int32" Name="pid" Nullable="true" />
+          <Property Type="Decimal" Name="total_price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="c_name" Nullable="true" />
+          <Property Type="String" Name="p_name" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="DateTime" Name="date" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="oid" />
+          </Key>
+          <Property Name="oid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderdate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Covid_essentials">
+          <Key>
+            <PropertyRef Name="prid" />
+          </Key>
+          <Property Name="prid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mdate" Type="DateTime" Precision="7" />
+          <Property Name="edate" Type="DateTime" Precision="7" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="img" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="describe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="Colgate_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="p_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="c_name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="manufacture_date" Nullable="true" />
+          <Property Type="DateTime" Name="expiry_date" Nullable="true" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dettol_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="p_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="c_name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="manufacture_date" Nullable="true" />
+          <Property Type="DateTime" Name="expiry_date" Nullable="true" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Nivea_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="p_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="c_name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="manufacture_date" Nullable="true" />
+          <Property Type="DateTime" Name="expiry_date" Nullable="true" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="brand_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="p_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="c_name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="manufacture_date" Nullable="true" />
+          <Property Type="DateTime" Name="expiry_date" Nullable="true" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="covid_Result">
+          <Property Type="Int32" Name="pid" Nullable="false" />
+          <Property Type="String" Name="p_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="c_name" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="manufacture_date" Nullable="true" />
+          <Property Type="DateTime" Name="expiry_date" Nullable="true" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="img" Nullable="true" />
+          <Property Type="String" Name="des" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rgModelStoreContainer" CdmEntityContainer="rgEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="rgModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="login" FunctionName="rgModel.Store.login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.login_Result">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="medicine_insert" FunctionName="rgModel.Store.medicine_insert" />
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="rgModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="m_name" ColumnName="m_name" />
+                <ScalarProperty Name="mid" ColumnName="mid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Health_care">
+            <EntityTypeMapping TypeName="rgModel.Health_care">
+              <MappingFragment StoreEntitySet="Health_care">
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Health_care_insert" FunctionName="rgModel.Store.Health_care_insert" />
+          <FunctionImportMapping FunctionImportName="cart_insert" FunctionName="rgModel.Store.cart_insert" />
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="rgModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="oid" ColumnName="oid" />
+                <ScalarProperty Name="mid" ColumnName="mid" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="cart_display" FunctionName="rgModel.Store.cart_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.cart_display_Result">
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="mid" ColumnName="mid" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="rgModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="oid" ColumnName="oid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Orders_insert" FunctionName="rgModel.Store.Orders_insert" />
+          <EntitySetMapping Name="Covid_essentials">
+            <EntityTypeMapping TypeName="rgModel.Covid_essentials">
+              <MappingFragment StoreEntitySet="Covid_essentials">
+                <ScalarProperty Name="describe" ColumnName="describe" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="edate" ColumnName="edate" />
+                <ScalarProperty Name="mdate" ColumnName="mdate" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="prid" ColumnName="prid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Colgate" FunctionName="rgModel.Store.Colgate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.Colgate_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="des" ColumnName="des" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dettol" FunctionName="rgModel.Store.Dettol">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.Dettol_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="des" ColumnName="des" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Nivea" FunctionName="rgModel.Store.Nivea">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.Nivea_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="des" ColumnName="des" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="brand" FunctionName="rgModel.Store.brand">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.brand_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="des" ColumnName="des" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="covid" FunctionName="rgModel.Store.covid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rgModel.covid_Result">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="manufacture_date" ColumnName="manufacture_date" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="des" ColumnName="des" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="register_user" FunctionName="rgModel.Store.register_user" />
+          <FunctionImportMapping FunctionImportName="medicine_update1" FunctionName="rgModel.Store.medicine_update" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

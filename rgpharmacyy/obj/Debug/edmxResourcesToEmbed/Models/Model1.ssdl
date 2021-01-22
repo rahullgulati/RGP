@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="rgModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime2" Precision="7" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="mid" Type="int" />
+    <Property Name="pid" Type="int" />
+    <Property Name="oid" Type="int" />
+    <Property Name="total_price" Type="money" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Covid_essentials">
+    <Key>
+      <PropertyRef Name="prid" />
+    </Key>
+    <Property Name="prid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pname" Type="varchar" MaxLength="50" />
+    <Property Name="cname" Type="varchar" MaxLength="50" />
+    <Property Name="mdate" Type="datetime2" Precision="7" />
+    <Property Name="edate" Type="datetime2" Precision="7" />
+    <Property Name="price" Type="money" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="img" Type="nvarchar" MaxLength="300" />
+    <Property Name="describe" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Health_care">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p_name" Type="varchar" MaxLength="100" />
+    <Property Name="c_name" Type="varchar" MaxLength="100" />
+    <Property Name="manufacture_date" Type="datetime2" Precision="7" />
+    <Property Name="expiry_date" Type="datetime2" Precision="7" />
+    <Property Name="price" Type="money" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="img" Type="nvarchar(max)" />
+    <Property Name="des" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="m_name" Type="varchar" MaxLength="100" />
+    <Property Name="c_name" Type="varchar" MaxLength="100" />
+    <Property Name="manufacture_date" Type="datetime2" Precision="7" />
+    <Property Name="expiry_date" Type="datetime2" Precision="7" />
+    <Property Name="price" Type="money" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="img" Type="nvarchar(max)" />
+    <Property Name="des" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="oid" />
+    </Key>
+    <Property Name="oid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="amount" Type="money" />
+    <Property Name="orderdate" Type="datetime2" Precision="7" />
+    <Property Name="payment_method" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fname" Type="varchar" MaxLength="50" />
+    <Property Name="lname" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="phone_no" Type="char" MaxLength="10" />
+    <Property Name="dob" Type="date" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="10" />
+    <Property Name="created_at" Type="datetime2" Precision="7" />
+  </EntityType>
+  <Function Name="brand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="cart_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="cart_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="mid" Type="int" Mode="In" />
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="oid" Type="int" Mode="In" />
+    <Parameter Name="total_price" Type="money" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Colgate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="covid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="des" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Dettol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Health_care_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_name" Type="varchar" Mode="In" />
+    <Parameter Name="c_name" Type="varchar" Mode="In" />
+    <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+    <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="des" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="medicine_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="m_name" Type="varchar" Mode="In" />
+    <Parameter Name="c_name" Type="varchar" Mode="In" />
+    <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+    <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="des" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="medicine_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mid" Type="int" Mode="In" />
+    <Parameter Name="m_name" Type="varchar" Mode="In" />
+    <Parameter Name="c_name" Type="varchar" Mode="In" />
+    <Parameter Name="manufacture_date" Type="datetime2" Mode="In" />
+    <Parameter Name="expiry_date" Type="datetime2" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="img" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="des" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Nivea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Orders_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="amount" Type="money" Mode="In" />
+    <Parameter Name="payment_method" Type="varchar" Mode="In" />
+    <Parameter Name="oid" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="register_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="char" Mode="In" />
+    <Parameter Name="DOB" Type="date" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="rgModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Covid_essentials" EntityType="Self.Covid_essentials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Health_care" EntityType="Self.Health_care" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
